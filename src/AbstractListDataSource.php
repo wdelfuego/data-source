@@ -4,14 +4,19 @@ namespace Wdelfuego\DataSource;
 
 abstract class AbstractListDataSource extends AbstractDataSource
 {
-    public function data() : array
+    public function data($translated = true) : array
     {
         return [
-            'title' => $this->title(),
-            'items' => $this->items()
+            'title' => $this->title($translated),
+            'items' => $this->items($translated)
         ];
     }
     
-    abstract public function title() : string;
-    abstract public function items() : array;
+    abstract public function title($translated = true) : string;
+    abstract public function items($translated = true) : array;
+    
+    public function nonTranslatedItems() : array
+    {
+        return $this->items(false);
+    }
 }
